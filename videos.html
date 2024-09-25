@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Videos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .video-list {
+            margin-top: 20px;
+        }
+
+        .video-list video {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .video-item {
+            margin-bottom: 20px;
+        }
+
+        .video-date {
+            font-size: 12px;
+            color: #666;
+        }
+
+        #addVideoForm {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #addVideoForm input {
+            margin-bottom: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container" id="videoPage">
+        <h2>Available Videos</h2>
+        <div class="video-list" id="videoList">
+            <!-- Videos will be dynamically added here -->
+        </div>
+
+        <div id="addVideoForm">
+            <h3>Add a New Video</h3>
+            <input type="text" id="videoTitle" placeholder="Enter video title">
+            <input type="file" id="videoFile">
+            <input type="date" id="videoDate" placeholder="Enter upload date">
+            <button onclick="addVideo()">Add Video</button>
+        </div>
+    </div>
+
+    <script>
+        // Fetch stored videos from local storage
+        let videos = JSON.parse(localStorage.getItem('videos')) || [];
+
+        // Check if the user is admin
+        if (localStorage.getItem('isAdmin') === 'true') {
+            document.getElementById('addVideoForm').style.display = 'block';
+        }
+
+        // Function to add a new video
+        function addVideo() {
+            const videoTitle = document.getElementById('videoTitle').value;
+            const videoFile = document.getElementById('videoFile').files[0];
+            const videoDate = document.getElementById('videoDate').value;
+
+            if (videoTitle && videoFile && videoDate) {
+                const newVideo = {
+                    title: videoTitle,
+                    file: URL.createObjectURL(videoFile),
+                    date: videoDate
+                };
+
+                videos.push(newVideo);
+                videos.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort videos by date
+
+                localStorage.setItem('videos', JSON.stringify(videos)); // Store videos in localStorage
+                renderVideos();
+            } else {
+                alert('Please enter all fields and select a video file.');
+            }
+        }
+
+        // Function to display the videos
+        function renderVideos() {
+            const videoList = document.getElementById('videoList');
+            videoList.innerHTML = ''; // Clear the current videos
+
+            videos.forEach(video => {
+                const videoItem = document.createElement('div');
+                videoItem.className = 'video-item';
+
+                const videoElement = document.createElement('video');
+                videoElement.controls = true;
+
+                const sourceElement = document.createElement('source');
+                sourceElement.src = video.file;
+                sourceElement.type = 'video/mp4';
+
+                videoElement.appendChild(sourceElement);
+
+                const videoTitle = document.createElement('h4');
+                videoTitle.innerText = video.title;
+
+                const videoDate = document.createElement('div');
+                videoDate.className = 'video-date';
+                videoDate.innerText = `Uploaded on: ${video.date}`;
+
+                videoItem.appendChild(videoTitle);
+                videoItem.appendChild(videoElement);
+                videoItem.appendChild(videoDate);
+
+                videoList.appendChild(videoItem);
+            });
+        }
+
+        // Render videos on page load
+        renderVideos();
+    </script>
+
+</body>
+</html>
