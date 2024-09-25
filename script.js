@@ -2,6 +2,7 @@
 let users = JSON.parse(localStorage.getItem('users')) || [];
 let videos = JSON.parse(localStorage.getItem('videos')) || [];
 
+// Login logic
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const username = document.getElementById('username').value;
@@ -11,15 +12,16 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     
     if (user) {
         if (username === "kingyork" && password === "1116") {
-            window.location.href = 'admin.html';
+            window.location.href = 'admin.html'; // Admin access
         } else {
-            window.location.href = 'main.html';
+            window.location.href = 'main.html'; // Regular user
         }
     } else {
         alert('Invalid login. Please sign up first.');
     }
 });
 
+// Signup logic
 document.getElementById('signupForm')?.addEventListener('submit', function(e) {
     e.preventDefault();
     const newUsername = document.getElementById('newUsername').value;
@@ -37,11 +39,12 @@ document.getElementById('signupForm')?.addEventListener('submit', function(e) {
     }
 });
 
+// Video upload logic (admin only)
 document.getElementById('uploadForm')?.addEventListener('submit', function(e) {
     e.preventDefault();
     const videoTitle = document.getElementById('videoTitle').value;
     const videoUrl = document.getElementById('videoUrl').value;
-    
+
     videos.push({ title: videoTitle, url: videoUrl, date: new Date().toISOString() });
     localStorage.setItem('videos', JSON.stringify(videos));
 
@@ -49,10 +52,11 @@ document.getElementById('uploadForm')?.addEventListener('submit', function(e) {
     window.location.href = 'main.html';
 });
 
+// Load videos for the main page
 function loadVideos() {
     const videoList = document.getElementById('videoList');
     if (videos.length > 0) {
-        videos.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date
+        videos.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by upload date
         videos.forEach(video => {
             const li = document.createElement('li');
             li.innerHTML = `<a href="${video.url}" target="_blank">${video.title}</a> (Uploaded on: ${new Date(video.date).toLocaleDateString()})`;
