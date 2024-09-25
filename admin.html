@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Upload Videos</title>
+    <title>Admin Panel</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,12 +12,16 @@
         <form id="uploadForm">
             <label for="videoTitle">Video Title:</label>
             <input type="text" id="videoTitle" required>
-            <label for="videoUrl">Video URL:</label>
+            <label for="videoUrl">Video URL (Google Drive Link):</label>
             <input type="text" id="videoUrl" required>
-            <button type="submit">Upload</button>
+            <button type="submit">Upload Video</button>
         </form>
         <button onclick="location.href='main.html'">Back to Main</button>
     </div>
+
+    <footer>
+        <p>Credits: Sandeep Kariyawasam</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
