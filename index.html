@@ -8,6 +8,42 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <style>
+         /* Previous styles remain the same */
+        
+        /* Adding new styles for the celebration section */
+        .celebration-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .cake-container {
+            margin: 2rem auto;
+            transform-origin: center;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .cake-emoji {
+            font-size: 4rem;
+            display: inline-block;
+        }
+        
+        @keyframes partyPopper {
+            0% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(45deg) scale(1.2); }
+            100% { transform: rotate(-45deg) scale(1); }
+        }
+        
+        .party-popper {
+            display: inline-block;
+            animation: partyPopper 2s ease-in-out infinite;
+        }
+
+        /* Previous animations remain the same */
         @keyframes float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(5deg); }
@@ -186,21 +222,9 @@
                     </p>
                 </div>
             </div>
-<div class="grid md:grid-cols-3 gap-8 mb-16">
-        <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
-            <h3 class="text-2xl font-bold text-blue-300 mb-4">18 Years Young</h3>
-            <p class="text-gray-300">A milestone worth celebrating! <span class="inline-emoji bounce">🎉</span></p>
-        </div>
-        <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
-            <h3 class="text-2xl font-bold text-blue-300 mb-4">Beautiful Soul</h3>
-            <p class="text-gray-300">Your kindness lights up every room! <span class="inline-emoji spin-emoji">✨</span></p>
-        </div>
-        <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
-            <h3 class="text-2xl font-bold text-blue-300 mb-4">Forever Friends</h3>
-            <p class="text-gray-300">Here's to our endless friendship! <span class="inline-emoji pulse-emoji">💖</span></p>
-        </div>
-    </div>
-  <!-- Wishes Grid -->
+ <!-- Previous content remains exactly the same until the wishes grid -->
+    
+    <!-- Wishes Grid -->
     <div class="grid md:grid-cols-3 gap-8 mb-16">
         <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
             <h3 class="text-2xl font-bold text-blue-300 mb-4">18 Years Young</h3>
@@ -248,25 +272,7 @@
             ease: "power4.out"
         });
     </script>
-            <!-- Wishes Grid -->
-            <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
-                    <h3 class="text-2xl font-bold text-blue-300 mb-4">18 Years Young</h3>
-                    <p class="text-gray-300">A milestone worth celebrating! <span class="inline-emoji bounce">🎉</span></p>
-                </div>
-                <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
-                    <h3 class="text-2xl font-bold text-blue-300 mb-4">Beautiful Soul</h3>
-                    <p class="text-gray-300">Your kindness lights up every room! <span class="inline-emoji spin-emoji">✨</span></p>
-                </div>
-                <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
-                    <h3 class="text-2xl font-bold text-blue-300 mb-4">Forever Friends</h3>
-                    <p class="text-gray-300">Here's to our endless friendship! <span class="inline-emoji pulse-emoji">💖</span></p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
+            <script>
         // Particles.js Config
         particlesJS("particles-js", {
             particles: {
