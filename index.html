@@ -6,209 +6,340 @@
     <title>Happy 18th Birthday Ashmika! 🎉</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <style>
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
         }
         @keyframes swing {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
+            0%, 100% { transform: rotate(-8deg); }
+            50% { transform: rotate(8deg); }
         }
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-15px); }
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-15px) scale(1.1); }
         }
         @keyframes floatHeart {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+            50% { transform: translateY(-10px) scale(1.2) rotate(10deg); }
         }
         @keyframes shine {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
-        .floating {
-            animation: float 3s ease-in-out infinite;
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-10deg) scale(1.1); }
+            75% { transform: rotate(10deg) scale(1.1); }
         }
-        .swinging {
-            animation: swing 3s ease-in-out infinite;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
         }
-        .bouncing {
-            animation: bounce 2s ease-in-out infinite;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
-        .heart {
-            display: inline-block;
-            animation: floatHeart 2s ease-in-out infinite;
-        }
-        .shine {
-            display: inline-block;
-            animation: shine 2s ease-in-out infinite;
-        }
+
+        .floating { animation: float 4s ease-in-out infinite; }
+        .swinging { animation: swing 3s ease-in-out infinite; }
+        .bouncing { animation: bounce 2s ease-in-out infinite; }
+        .heart { animation: floatHeart 2s ease-in-out infinite; }
+        .wiggle-emoji { animation: wiggle 2s ease-in-out infinite; }
+        .pulse-emoji { animation: pulse 1.5s ease-in-out infinite; }
+        .spin-emoji { animation: spin 3s linear infinite; }
+        
         .gradient-text {
-            background: linear-gradient(45deg, #2563eb, #60a5fa, #93c5fd);
+            background: linear-gradient(300deg, #1e40af, #3b82f6, #60a5fa, #93c5fd);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            animation: shine 4s linear infinite;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        .balloon {
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 
+                0 8px 32px 0 rgba(31, 38, 135, 0.2),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 12px 40px 0 rgba(31, 38, 135, 0.25),
+                inset 0 0 0 2px rgba(255, 255, 255, 0.2);
+        }
+
+        .message-card {
+            position: relative;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 20px;
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+
+        .message-card::before {
+            content: '';
             position: absolute;
+            inset: -1px;
+            background: linear-gradient(45deg, #3b82f6, transparent, #60a5fa);
+            z-index: -1;
+            border-radius: 21px;
+            transform: translateZ(-1px);
+        }
+
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .frost-bg {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .inline-emoji {
+            display: inline-block;
+            transform-origin: center;
+        }
+ .celebration-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .cake-container {
+            margin: 2rem auto;
+            transform-origin: center;
             animation: float 4s ease-in-out infinite;
         }
-        .ribbon {
-            position: absolute;
-            animation: swing 5s ease-in-out infinite;
+        
+        .cake-emoji {
+            font-size: 4rem;
+            display: inline-block;
         }
-        html, body {
-            min-height: 100%;
-            height: auto;
+        
+        @keyframes partyPopper {
+            0% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(45deg) scale(1.2); }
+            100% { transform: rotate(-45deg) scale(1); }
         }
-        body {
-            background-attachment: fixed;
+        
+        .party-popper {
+            display: inline-block;
+            animation: partyPopper 2s ease-in-out infinite;
         }
-        .message-card {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .message-heading {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-        .message-text {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .message-signature {
-            opacity: 0;
-            transform: translateY(20px);
-        }
+
+        /* Previous animations remain the same */
+    
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-100 via-blue-50 to-sky-100 relative pb-12">
-    <!-- Top Celebration Banner -->
-    <div class="relative h-32 mb-8 overflow-hidden">
-        <!-- Balloons -->
-        <div class="balloon text-6xl" style="left: 5%; animation-delay: 0s;">🎈</div>
-        <div class="balloon text-5xl" style="left: 15%; animation-delay: 0.5s;">🎈</div>
-        <div class="balloon text-7xl" style="left: 25%; animation-delay: 1s;">🎈</div>
-        <div class="balloon text-6xl" style="right: 5%; animation-delay: 0.7s;">🎈</div>
-        <div class="balloon text-5xl" style="right: 15%; animation-delay: 1.2s;">🎈</div>
-        <div class="balloon text-7xl" style="right: 25%; animation-delay: 0.3s;">🎈</div>
-        
-        <!-- Stars and Sparkles -->
-        <div class="absolute top-4 left-10 text-4xl bouncing" style="animation-delay: 0.2s;">✨</div>
-        <div class="absolute top-8 right-12 text-4xl bouncing" style="animation-delay: 0.8s;">⭐</div>
-        <div class="absolute top-2 left-1/4 text-4xl bouncing" style="animation-delay: 0.5s;">🌟</div>
-        <div class="absolute top-6 right-1/4 text-4xl bouncing" style="animation-delay: 1.1s;">✨</div>
-        
-        <!-- Party poppers -->
-        <div class="absolute top-0 left-1/3 text-5xl swinging">🎉</div>
-        <div class="absolute top-0 right-1/3 text-5xl swinging" style="animation-delay: 0.5s;">🎊</div>
+<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative min-h-screen pb-12 text-gray-100">
+    <div id="particles-js"></div>
+    
+    <div class="relative py-12">
+        <div class="container mx-auto px-4 relative">
+            <!-- Main Title -->
+            <div class="text-center mb-16 relative">
+                <h1 class="text-7xl font-bold mb-6 gradient-text floating">
+                    Happy 18th Birthday
+                </h1>
+                <h2 class="text-8xl font-extrabold text-blue-400 mb-8 swinging">Ashmika! <span class="inline-emoji pulse-emoji">🎂</span></h2>
+                <div class="flex justify-center gap-6 text-4xl mb-8">
+                    <span class="bouncing">🎉</span>
+                    <span class="bouncing" style="animation-delay: 0.2s">⭐</span>
+                    <span class="bouncing" style="animation-delay: 0.4s">🎈</span>
+                    <span class="bouncing" style="animation-delay: 0.6s">✨</span>
+                </div>
+            </div>
+
+            <!-- Birthday Message Card -->
+            <div class="max-w-4xl mx-auto frost-bg p-10 mb-16 message-card">
+                <div class="text-center space-y-8">
+                    <h3 class="text-4xl font-bold text-blue-300 mb-6">Dear Ashmika,</h3>
+                    <p class="text-xl text-gray-200 leading-relaxed">
+                        සුභ 18 වෙනි උපන්දිනයක් ඔයාට! <span class="inline-emoji spin-emoji">✨</span> මම දන්නව පහුගිය දවස් වල උන දේවල් එක්ක මේ උපන්දිනේ එච්චරම සුභ නෑ කියල<span class="inline-emoji wiggle-emoji">🙃</span>.ඒත් ඉතින් ජීවිතේටම 18 වෙනි උපන්දිනේ එන්නෙ එක පාරයි නෙ<span class="inline-emoji pulse-emoji">😌</span>.ඉගනගන්න වැඩකටයුතු හොඳින් කරගන්න පුලුවන් වෙන,කට පරිස්සම් කරගෙන ලෙඩ අඩු වෙන <span class="inline-emoji wiggle-emoji">😉</span> සුභම සුභ උපන්දිනයක් වේවා ඔයාට...
+                    </p>
+                    <p class="text-xl text-gray-200 leading-relaxed">
+                        May your 18th year be filled with endless joy, amazing adventures, and all the success you deserve!
+                    </p>
+                    <p class="text-2xl font-semibold text-blue-300 mt-8">
+                        With lots of love,<br>
+                        Yasodha <span class="heart">❤️</span>
+                    </p>
+                </div>
+            </div>
+<div class="grid md:grid-cols-3 gap-8 mb-16">
+        <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
+            <h3 class="text-2xl font-bold text-blue-300 mb-4">18 Years Young</h3>
+            <p class="text-gray-300">A milestone worth celebrating! <span class="inline-emoji bounce">🎉</span></p>
+        </div>
+        <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
+            <h3 class="text-2xl font-bold text-blue-300 mb-4">Beautiful Soul</h3>
+            <p class="text-gray-300">Your kindness lights up every room! <span class="inline-emoji spin-emoji">✨</span></p>
+        </div>
+        <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
+            <h3 class="text-2xl font-bold text-blue-300 mb-4">Forever Friends</h3>
+            <p class="text-gray-300">Here's to our endless friendship! <span class="inline-emoji pulse-emoji">💖</span></p>
+        </div>
+    </div>
+  <!-- Wishes Grid -->
+    <div class="grid md:grid-cols-3 gap-8 mb-16">
+        <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
+            <h3 class="text-2xl font-bold text-blue-300 mb-4">18 Years Young</h3>
+            <p class="text-gray-300">A milestone worth celebrating! <span class="inline-emoji bounce">🎉</span></p>
+        </div>
+        <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
+            <h3 class="text-2xl font-bold text-blue-300 mb-4">Beautiful Soul</h3>
+            <p class="text-gray-300">Your kindness lights up every room! <span class="inline-emoji spin-emoji">✨</span></p>
+        </div>
+        <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
+            <h3 class="text-2xl font-bold text-blue-300 mb-4">Forever Friends</h3>
+            <p class="text-gray-300">Here's to our endless friendship! <span class="inline-emoji pulse-emoji">💖</span></p>
+        </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h1 class="text-6xl font-bold mb-4 gradient-text floating">
-                Happy 18th Birthday
-            </h1>
-            <h2 class="text-7xl font-extrabold text-blue-500 mb-8">Ashmika! 🎂</h2>
-            <div class="flex justify-center gap-4 text-3xl mb-8">
-                <span class="bouncing inline-block" style="animation-delay: 0s;">🎂</span>
-                <span class="bouncing inline-block" style="animation-delay: 0.2s;">🎊</span>
-                <span class="bouncing inline-block" style="animation-delay: 0.4s;">🎈</span>
-                <span class="bouncing inline-block" style="animation-delay: 0.6s;">🎉</span>
-                <span class="bouncing inline-block" style="animation-delay: 0.8s;">💝</span>
-            </div>
+    <!-- New Celebration Section -->
+    <div class="celebration-section">
+        <h2 class="text-4xl font-bold text-blue-400 mb-8">
+            <span class="party-popper">🎉</span>
+            Time to Celebrate!
+            <span class="party-popper">🎉</span>
+        </h2>
+        <div class="cake-container">
+            <span class="cake-emoji pulse-emoji">🎂</span>
         </div>
-
-        <!-- Birthday Message Card -->
-        <div class="max-w-4xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl shadow-2xl p-8 mb-12 message-card">
-            <div class="text-center space-y-6">
-                <h3 class="text-3xl font-bold text-blue-600 mb-4 message-heading">Dear Ashmika,</h3>
-                <p class="text-lg text-gray-700 leading-relaxed message-text">
-                    සුභ 18 වෙනි උපන්දිනයක් ඔයාට! <span class="shine">✨</span> මම දන්නව පහුගිය දවස් වල උන දේවල් එක්ක මේ උපන්දිනේ එච්චරම සුභ නෑ කියල🙃.ඒත් ඉතින් ජීවිතේටම 18 වෙනි උපන්දිනේ එන්නෙ එක පාරයි නෙ😌.ඉගනගන්න වැඩකටයුතු හොඳින් කරගන්න පුලුවන් වෙන,කට පරිස්සම් කරගෙන ලෙඩ අඩු වෙන 😉 සුභම සුභ උපන්දිනයක් වේවා ඔයාට...
-                </p>
-                <p class="text-lg text-gray-700 leading-relaxed message-text">
-                    May your 18th year be filled with endless joy, amazing adventures, and all the success you deserve!
-                </p>
-                <p class="text-xl font-semibold text-blue-600 mt-4 message-signature">
-                    With lots of love,<br>
-                    Yasodha <span class="heart">❤️</span>
-                </p>
-            </div>
+        <div class="flex justify-center gap-6 text-4xl mt-8">
+            <span class="inline-emoji bouncing">🎈</span>
+            <span class="inline-emoji wiggle-emoji">🎁</span>
+            <span class="inline-emoji spin-emoji">✨</span>
+            <span class="inline-emoji pulse-emoji">🎊</span>
+            <span class="inline-emoji bouncing">🎈</span>
         </div>
+    </div>
 
-        <!-- Birthday Wishes Cards -->
-        <div class="grid md:grid-cols-3 gap-6 mb-12">
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center transform hover:scale-105 transition-transform">
-                <h3 class="text-2xl font-bold text-blue-500 mb-3">18 Years Young</h3>
-                <p class="text-gray-700">A milestone worth celebrating! 🎉</p>
+    <!-- Previous scripts remain exactly the same -->
+    <script>
+        // Previous script content remains exactly the same
+        
+        // Add animation for new elements
+        gsap.from(".celebration-section", {
+            duration: 1.5,
+            y: 100,
+            opacity: 0,
+            delay: 2,
+            ease: "power4.out"
+        });
+    </script>
+            <!-- Wishes Grid -->
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
+                    <h3 class="text-2xl font-bold text-blue-300 mb-4">18 Years Young</h3>
+                    <p class="text-gray-300">A milestone worth celebrating! <span class="inline-emoji bounce">🎉</span></p>
+                </div>
+                <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
+                    <h3 class="text-2xl font-bold text-blue-300 mb-4">Beautiful Soul</h3>
+                    <p class="text-gray-300">Your kindness lights up every room! <span class="inline-emoji spin-emoji">✨</span></p>
+                </div>
+                <div class="glass-card p-8 rounded-xl text-center transform hover:scale-105 transition-all">
+                    <h3 class="text-2xl font-bold text-blue-300 mb-4">Forever Friends</h3>
+                    <p class="text-gray-300">Here's to our endless friendship! <span class="inline-emoji pulse-emoji">💖</span></p>
+                </div>
             </div>
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center transform hover:scale-105 transition-transform">
-                <h3 class="text-2xl font-bold text-blue-500 mb-3">Beautiful Soul</h3>
-                <p class="text-gray-700">Your kindness lights up every room! ✨</p>
-            </div>
-            <div class="bg-white/80 backdrop-blur-sm rounded-xl p-6 text-center transform hover:scale-105 transition-transform">
-                <h3 class="text-2xl font-bold text-blue-500 mb-3">Forever Friends</h3>
-                <p class="text-gray-700">Here's to our endless friendship! 💖</p>
-            </div>
-        </div>
-
-        <!-- Final Celebration -->
-        <div class="text-center mb-12">
-            <h3 class="text-4xl font-bold text-blue-600 mb-6">🎉 Time to Celebrate! 🎉</h3>
-            <div id="celebration" class="text-6xl"></div>
         </div>
     </div>
 
     <script>
-        // Birthday emoji animation
-        const celebrations = ['🎂', '🎈', '🎁', '✨', '🎊', '🌟'];
-        let index = 0;
-        setInterval(() => {
-            document.getElementById('celebration').textContent = celebrations[index];
-            index = (index + 1) % celebrations.length;
-        }, 1000);
+        // Particles.js Config
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 100 },
+                color: { value: ["#60a5fa", "#93c5fd", "#dbeafe"] },
+                shape: { type: "circle" },
+                opacity: { 
+                    value: 0.4,
+                    random: true
+                },
+                size: { 
+                    value: 3,
+                    random: true 
+                },
+                move: {
+                    enable: true,
+                    speed: 1,
+                    direction: "none",
+                    random: true,
+                    out_mode: "out"
+                }
+            }
+        });
 
         // GSAP Animations
-        const tl = gsap.timeline();
-        
-        // Initial animations
-        gsap.from(".balloon", {
+        gsap.from("h1", {
             duration: 2,
+            y: -100,
+            opacity: 0,
+            ease: "elastic.out(1, 0.5)"
+        });
+
+        gsap.from("h2", {
+            duration: 2,
+            scale: 0,
+            opacity: 0,
+            delay: 0.5,
+            ease: "elastic.out(1, 0.5)"
+        });
+
+        gsap.from(".message-card", {
+            duration: 1.5,
             y: 100,
             opacity: 0,
-            stagger: 0.2
+            delay: 1,
+            ease: "power4.out"
         });
-        gsap.from("h1", {duration: 1.5, y: -100, opacity: 0, delay: 1});
-        gsap.from("h2", {duration: 1.5, y: 100, opacity: 0, delay: 1.5});
-        gsap.from(".grid", {duration: 1, opacity: 0, y: 50, delay: 2});
 
-        // Message card animations
-        tl.to(".message-card", {
+        gsap.from(".glass-card", {
             duration: 1,
-            opacity: 1,
-            y: 0,
-            ease: "power2.out"
-        })
-        .to(".message-heading", {
-            duration: 0.8,
-            opacity: 1,
-            y: 0,
-            ease: "back.out(1.7)"
-        })
-        .to(".message-text", {
-            duration: 0.8,
-            opacity: 1,
-            y: 0,
-            stagger: 0.3,
-            ease: "power2.out"
-        })
-        .to(".message-signature", {
-            duration: 0.8,
-            opacity: 1,
-            y: 0,
-            ease: "power2.out"
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            delay: 1.5
+        });
+
+        // Interactive sparkle effect
+        document.addEventListener('mousemove', (e) => {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'absolute pointer-events-none';
+            sparkle.style.left = e.pageX + 'px';
+            sparkle.style.top = e.pageY + 'px';
+            sparkle.innerHTML = '✨';
+            document.body.appendChild(sparkle);
+
+            gsap.to(sparkle, {
+                duration: 1,
+                opacity: 0,
+                y: -20,
+                scale: 0,
+                ease: "power2.out",
+                onComplete: () => sparkle.remove()
+            });
         });
     </script>
 </body>
