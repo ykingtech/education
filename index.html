@@ -1,309 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy 18th Birthday Ashmika! 🎉</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <style>
-         /* Previous styles remain the same */
-        
-        /* Adding new styles for the celebration section */
-        .celebration-section {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            border-radius: 20px;
-            padding: 2rem;
-            margin-top: 2rem;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            
-        }
-        
-        .cake-container {
-            margin: 2rem auto;
-            transform-origin: center;
-            animation: float 4s ease-in-out infinite;
-        }
-        
-        .cake-emoji {
-            font-size: 4rem;
-            display: inline-block;
-        }
-        
-        @keyframes partyPopper {
-            0% { transform: rotate(-45deg) scale(1); }
-            50% { transform: rotate(45deg) scale(1.2); }
-            100% { transform: rotate(-45deg) scale(1); }
-        }
-        
-        .party-popper {
-            display: inline-block;
-            animation: partyPopper 2s ease-in-out infinite;
-        }
-
-        /* Previous animations remain the same */
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(5deg); }
+ @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
         @keyframes swing {
-            0%, 100% { transform: rotate(-8deg); }
-            50% { transform: rotate(8deg); }
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
         }
         @keyframes bounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-15px) scale(1.1); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
         }
         @keyframes floatHeart {
-            0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
-            50% { transform: translateY(-10px) scale(1.2) rotate(10deg); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
         @keyframes shine {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
         }
-        @keyframes wiggle {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(-10deg) scale(1.1); }
-            75% { transform: rotate(10deg) scale(1.1); }
+        .floating {
+            animation: float 3s ease-in-out infinite;
         }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.8; }
+        .swinging {
+            animation: swing 3s ease-in-out infinite;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .bouncing {
+            animation: bounce 2s ease-in-out infinite;
         }
-
-        .floating { animation: float 4s ease-in-out infinite; }
-        .swinging { animation: swing 3s ease-in-out infinite; }
-        .bouncing { animation: bounce 2s ease-in-out infinite; }
-        .heart { animation: floatHeart 2s ease-in-out infinite; }
-        .wiggle-emoji { animation: wiggle 2s ease-in-out infinite; }
-        .pulse-emoji { animation: pulse 1.5s ease-in-out infinite; }
-        .spin-emoji { animation: spin 3s linear infinite; }
-        
+        .heart {
+            display: inline-block;
+            animation: floatHeart 2s ease-in-out infinite;
+        }
+        .shine {
+            display: inline-block;
+            animation: shine 2s ease-in-out infinite;
+        }
         .gradient-text {
-            background: linear-gradient(300deg, #1e40af, #3b82f6, #60a5fa, #93c5fd);
-            background-size: 200% auto;
+            background: linear-gradient(45deg, #2563eb, #60a5fa, #93c5fd);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: shine 4s linear infinite;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
-        
-        .glass-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 
-                0 8px 32px 0 rgba(31, 38, 135, 0.2),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .glass-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                0 12px 40px 0 rgba(31, 38, 135, 0.25),
-                inset 0 0 0 2px rgba(255, 255, 255, 0.2);
-        }
-
-        .message-card {
-            position: relative;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            border-radius: 20px;
-            transform-style: preserve-3d;
-            transform: perspective(1000px);
-        }
-
-        .message-card::before {
-            content: '';
+        .balloon {
             position: absolute;
-            inset: -1px;
-            background: linear-gradient(45deg, #3b82f6, transparent, #60a5fa);
-            z-index: -1;
-            border-radius: 21px;
-            transform: translateZ(-1px);
-        }
-
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .frost-bg {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .inline-emoji {
-            display: inline-block;
-            transform-origin: center;
-        }
- .celebration-section {
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
-            border-radius: 20px;
-            padding: 2rem;
-            margin-top: 2rem;
-            width: 50%;
-            height: 100%;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .cake-container {
-            margin: 2rem auto;
-            transform-origin: center;
             animation: float 4s ease-in-out infinite;
         }
-        
-        .cake-emoji {
-            font-size: 4rem;
-            display: inline-block;
+        .ribbon {
+            position: absolute;
+            animation: swing 5s ease-in-out infinite;
         }
-        
-        @keyframes partyPopper {
-            0% { transform: rotate(-45deg) scale(1); }
-            50% { transform: rotate(45deg) scale(1.2); }
-            100% { transform: rotate(-45deg) scale(1); }
+        html, body {
+            min-height: 100%;
+            height: auto;
         }
-        
-        .party-popper {
-            display: inline-block;
-            animation: partyPopper 2s ease-in-out infinite;
+        body {
+            background-image: url('C:C:\Users\DELL-TECHWORLD\Desktop\nw2.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            background-color: rgba(255, 255, 255, 0.7);
         }
-
-        /* Previous animations remain the same */
-    
-    </style>
-</head>
-<body class="bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative min-h-screen pb-12 text-gray-100">
-    <div id="particles-js"></div>
-    
-    <div class="relative py-12">
-        <div class="container mx-auto px-4 relative">
-            <!-- Main Title -->
-            <div class="text-center mb-16 relative">
-                <h1 class="text-7xl font-bold mb-6 gradient-text floating">
-                    Happy 18th Birthday
-                </h1>
-                <h2 class="text-8xl font-extrabold text-blue-400 mb-8 swinging">Ashmika! <span class="inline-emoji pulse-emoji">🎂</span></h2>
-                <div class="flex justify-center gap-6 text-4xl mb-8">
-                    <span class="bouncing">🎉</span>
-                    <span class="bouncing" style="animation-delay: 0.2s">⭐</span>
-                    <span class="bouncing" style="animation-delay: 0.4s">🎈</span>
-                    <span class="bouncing" style="animation-delay: 0.6s">✨</span>
-                </div>
-            </div>
-
-            <!-- Birthday Message Card -->
-            <div class="max-w-4xl mx-auto frost-bg p-10 mb-16 message-card">
-                <div class="text-center space-y-8">
-                    <h3 class="text-4xl font-bold text-blue-300 mb-6">Dear Ashmika,</h3>
-                    <p class="text-xl text-gray-200 leading-relaxed">
-                        සුභ 18 වෙනි උපන්දිනයක් ඔයාට! <span class="inline-emoji spin-emoji">✨</span> මම දන්නව පහුගිය දවස් වල උන දේවල් එක්ක මේ උපන්දිනේ එච්චරම සුභ නෑ කියල<span class="inline-emoji wiggle-emoji">🙃</span>.ඒත් ඉතින් ජීවිතේටම 18 වෙනි උපන්දිනේ එන්නෙ එක පාරයි නෙ<span class="inline-emoji pulse-emoji">😌</span>.ඉගනගන්න වැඩකටයුතු හොඳින් කරගන්න පුලුවන් වෙන,කට පරිස්සම් කරගෙන ලෙඩ අඩු වෙන <span class="inline-emoji wiggle-emoji">😉</span> සුභම සුභ උපන්දිනයක් වේවා ඔයාට...
-                    </p>
-                    <p class="text-xl text-gray-200 leading-relaxed">
-                        May your 18th year be filled with endless joy, amazing adventures, and all the success you deserve!
-                    </p>
-                    <p class="text-2xl font-semibold text-blue-300 mt-8">
-                        With lots of love,<br>
-                        Yasodha <span class="heart">❤️</span>
-                    </p>
-                </div>
-            </div>
- <!-- Previous content remains exactly the same until the wishes grid -->
-    
-   
-  
-            <script>
-        // Particles.js Config
-        particlesJS("particles-js", {
-            particles: {
-                number: { value: 100 },
-                color: { value: ["#60a5fa", "#93c5fd", "#dbeafe"] },
-                shape: { type: "circle" },
-                opacity: { 
-                    value: 0.4,
-                    random: true
-                },
-                size: { 
-                    value: 3,
-                    random: true 
-                },
-                move: {
-                    enable: true,
-                    speed: 1,
-                    direction: "none",
-                    random: true,
-                    out_mode: "out"
-                }
-            }
-        });
-
-        // GSAP Animations
-        gsap.from("h1", {
-            duration: 2,
-            y: -100,
-            opacity: 0,
-            ease: "elastic.out(1, 0.5)"
-        });
-
-        gsap.from("h2", {
-            duration: 2,
-            scale: 0,
-            opacity: 0,
-            delay: 0.5,
-            ease: "elastic.out(1, 0.5)"
-        });
-
-        gsap.from(".message-card", {
-            duration: 1.5,
-            y: 100,
-            opacity: 0,
-            delay: 1,
-            ease: "power4.out"
-        });
-
-        gsap.from(".glass-card", {
-            duration: 1,
-            opacity: 0,
-            y: 50,
-            stagger: 0.2,
-            delay: 1.5
-        });
-
-        // Interactive sparkle effect
-        document.addEventListener('mousemove', (e) => {
-            const sparkle = document.createElement('div');
-            sparkle.className = 'absolute pointer-events-none';
-            sparkle.style.left = e.pageX + 'px';
-            sparkle.style.top = e.pageY + 'px';
-            sparkle.innerHTML = '✨';
-            document.body.appendChild(sparkle);
-
-            gsap.to(sparkle, {
-                duration: 1,
-                opacity: 0,
-                y: -20,
-                scale: 0,
-                ease: "power2.out",
-                onComplete: () => sparkle.remove()
-            });
-        });
-    </script>
-</body>
-</html>
+        .message-card {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .message-heading {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        .message-text {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .message-signature {
+            opacity: 0;
+            transform: translateY(20px);
+        }
